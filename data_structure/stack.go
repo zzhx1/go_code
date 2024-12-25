@@ -6,24 +6,15 @@ import (
 
 
 func NewStack() []int { return []int{} } 
-func push() {}
-
-func main() {
-	stack := NewStack()
-	stack.Push(1)
-	stack.Push(2)
-	stack.Push(3)
-
-	fmt.Println("Stack size:", stack.Size())
-	fmt.Println("Peek:", stack.Peek())
-	fmt.Println("Pop:", stack.Pop())
-	fmt.Println("Stack size after pop:", stack.Size())
+func push(stack *[]int, a int) { *stack = append(*stack, a) }
+func pop(stack *[]int) int {
+	length := len(*stack)
+	res := (*stack)[length-1]
+	*stack = (*stack)[:length-1]
+	return res
 }
 
 
-func initStack() []int {
-	return []int{}
-}
 
 
 func main()  {
