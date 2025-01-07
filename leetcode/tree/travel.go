@@ -94,6 +94,25 @@ func postorderTraversal_iter(root *TreeNode) []int {
     return res 
 }
 
+//postorderTraversal_iter simple implementation, reverse the perorderTraversal_iter 
+func postorderTraversal_iter_simple(root *TreeNode) []int {
+    if root == nil { 
+        return []int{}
+    }
+    stack := []*TreeNode{root} 
+    res := []int{}
+    for len(stack) > 0 {
+        node := pop(&stack)
+        res = append(res, node.Val)
+        push(&stack, node.Left) 
+        push(&stack, node.Right)  
+    }
+    for i, j := 0, len(res)-1; i < j; i, j = i+1, j-1 {
+        res[i], res[j] = res[j], res[i]
+    }
+    return res
+}
+
 func levelOrder(root *TreeNode) [][]int {
     queue := []*TreeNode{}
     res := [][]int{}
@@ -112,8 +131,6 @@ func levelOrder(root *TreeNode) [][]int {
     }
     return res
 }
-
-
 
 
 func printTree(root *TreeNode, level int) {
